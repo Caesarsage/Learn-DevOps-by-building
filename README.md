@@ -1,34 +1,67 @@
-# DEVOPS PROJECTS AND DOCUMENTATIONS
-Project Based Learning.
+# DevOps Projects
 
-In attempt to becoming a better DevOps engineer. i will be following similar projects based learning as Darey.io, cloudacademy.com labs and others.
+A curated collection of DevOps projects, grouped by **difficulty level** and **technology stack**.
 
-The following projects will be implemented
+## 🧩 Levels
 
-- ### Project 0: [Multi Cloud Bash File Uploader](./project-00/) [inprogress]
-- ### Project 1: [LAMP STACK IMPLEMENTATION](./project-01/) [⭐]
-- ### Project 2: [LEMP STACK IMPLEMENTATION](./project-02/) [⭐]
-- ### Project 3: [MERN WEB STACK IMPLEMENTATION](./project-03/)[⭐]
-- ### Project 4: [MEAN STACK IMPLEMENTATION](./project-04)[⭐]
-- ### Project 5: [IMPLEMENT A CLIENT SERVER AERCHITECTURE USING MYSQL DATABASE MANAGEMENT SYSTEM](./project-05/)[⭐]
-- ### Project 6: [ WEB SOLUTION WITH WORDPRESS](./project-06/)[]
-- ### Project 7: [ Deploying and Monitoring Web Apps in Azure App Service](./project-07/)[⭐]
-- ### Project 8: [ Using Serverless Framework to deploy simple python function to AWS Lambda, API Gateway, and CloudWatch.](./project-08/)[⭐]
+- [Beginner](./beginner)
+- [Intermediate](./intermediate)
+- [Advanced](./advanced)
+
+## 📦 Growing Project lists (Completed and planned)
+
+### Start small, Beginner projects
+
+- ### [MULTI-CLOUD BASH FILE UPLOADER](./beginner/bash/project-multi-cloud-uploader/README.md) [⭐]
+- ### [LAMP STACK IMPLEMENTATION](./beginner/linux/lamp-stack/README.md) [⭐]
+- ### [LEMP STACK IMPLEMENTATION](./beginner/linux/lemp-stack/README.md) [⭐]
+- ### [MERN WEB STACK IMPLEMENTATION](./beginner/linux/mern-stack/README.md)[⭐]
+- ### [MEAN STACK IMPLEMENTATION](./beginner/linux/mean-stack/README.md)[⭐]
+- ### [IMPLEMENT A CLIENT SERVER AERCHITECTURE USING MYSQL DATABASE MANAGEMENT SYSTEM](./beginner/linux/project-05-wordpress-client-server-DBMS/README.md)[⭐]
+- ### [ WEB SOLUTION WITH WORDPRESS](./beginner/linux/wordpress/)[⭐]
+
+### Move a step further
+
+- ### [ Deploying and Monitoring Web Apps in Azure App Service](./intermediate/azure/azure-app-service-monitoring/README.md)[⭐]
+- ### [ Using Serverless Framework to deploy simple python function to AWS Lambda, API Gateway, and CloudWatch.](./intermediate/aws/serverless-python/Readme.md)[⭐]
+
 <!-- - ### Project 8: [ LOAD BALANCER SOLUTION WITH APACHE](./project-08) -->
-- ### Project 9: [CONTINOUS INTEGRATION PIPELINE FOR TOOLING WEBSITE](./project-09)
-- ### Project 10: [ LOAD BALANCER SOLUTION WITH NGNIX AND SSL/TLS](./project-10)
-- ### Project 11: [ ANSIBLE CONFIGURATION MANAGEMENT (Automate project 7 to 10)](./project-11).
-- ### Project 12: [ ANSIBLE REFACTORING AND STATIC ASSIGNMENTS ](./project-12).
-- ### Project 13: [ ANSIBLE DYNAMIC ASSIGNMENTS ](./project-13).
-- ### Project 14: [ EXPERIENCE CONTINUOUS INTEGRATION WITH JENKINS | ANSIBLE | ARTIFACTORY | SONARQUBE | PHP](./project-14)
-- ### Project 15: [ CLOUD FOR TWO COMPANY USING REVERSE PROXY TECHNOLOGY ](./project-15)
-- ### Project 16: [ AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM 1](./project-16)
-- ### Project 17: [ AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM 2](./project-17)
-- ### Project 18: [ AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM 3](./project-18)
-- ### Project 19: [ MIGRATION TO THE CLOUD WITH CONTEINERIZATION  - DOCKER AND DOCKER CONPOSE](./project-19)
-- ### Project 20: [ ORCHESTRATING CONTAINERS ACCROSS MULTIPLE SERVERS WITH KUBERNETES](./project-20)
-- ### project 21: [ DEPLOYING MONGODB-EXPRESS APPLICATION WITH KUBERNETES](./project-21)
-- ### Project 22: [ DEPLOYING APPLICATIONS INTO KUBERNETES CLUSTER](./project-22)
-- ### Project 23: [PERSISTING DATA IN KUBERNETES CLUSTER](./project-23)
-- ### Project 24: [ BUILDING ELASTIC KUBERNETES SERVICE WITH TERRAFORM](./project-24)
-<!-- - ### More Projects reference: [Azure Cert Project Based](https://github.com/madebygps/projects) -->
+- ### [CONTINOUS INTEGRATION PIPELINE FOR TOOLING WEBSITE](./intermediate/security/ci-tooling/README.md)
+- ### [ LOAD BALANCER SOLUTION WITH NGNIX AND SSL/TLS](./intermediate/ngnix/loadbalancer-ngnix-ssl/)
+- ### [ ANSIBLE CONFIGURATION MANAGEMENT ](./intermediate/ansible/nsible-automation/README.md)
+- ### [ ANSIBLE REFACTORING AND STATIC ASSIGNMENTS ](./intermediate/ansible/ansible-refactor/README.md)
+- ### [ ANSIBLE DYNAMIC ASSIGNMENTS ](./intermediate/ansible/ansible-dynamic/README.md).
+- ### [ EXPERIENCE CONTINUOUS INTEGRATION WITH JENKINS | ANSIBLE | ARTIFACTORY | SONARQUBE | PHP](./intermediate/security/ci-security-pipeline/README.md)
+- ### [ CLOUD FOR TWO COMPANY USING REVERSE PROXY TECHNOLOGY ](./advanced/networking/reverse-proxy/README.md)
+- ### [ AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM 1](./advanced/terraform/terraform-1/README.md)
+- ### [ AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM 2](./advanced/terraform/terraform-2/README.md)
+- ### [ AUTOMATE INFRASTRUCTURE WITH IAC USING TERRAFORM 3](./advanced/terraform/terraform-3/README.md)
+- ### [ MIGRATION TO THE CLOUD WITH CONTEINERIZATION  - DOCKER AND DOCKER CONPOSE](./advanced/docker/docker-compose/README.md)
+- ### [ ORCHESTRATING CONTAINERS ACCROSS MULTIPLE SERVERS WITH KUBERNETES](./advanced/kubernetes/container-multiple-servers-k8s/README.md)
+- ### [ DEPLOYING MONGODB-EXPRESS APPLICATION WITH KUBERNETES](./advanced/kubernetes/mongo-k8s/README.md)
+- ### [ DEPLOYING APPLICATIONS INTO KUBERNETES CLUSTER](./advanced/kubernetes/apps-k8s/README.md)
+- ### [PERSISTING DATA IN KUBERNETES CLUSTER](./advanced/kubernetes/data-k8s/README.md)
+- ### [ BUILDING ELASTIC KUBERNETES SERVICE WITH TERRAFORM](./advanced/aws/eks-terraform/README.md)
+
+<br />
+
+> Each folder includes hands-on projects, scripts, assets, and README documentation.
+
+## 🚀 How to Use
+
+Select a project from the list above, clone the repository, and follow the instructions in the respective folder README.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read the [Contributing Guide](./CONTRIBUTING.md) for details on how to contribute.
+
+## 🛡️ Security
+
+If you discover a security vulnerability, please review our [Security Policy](./SECURITY.md) for reporting guidelines.
+
+## 📜 Code of Conduct
+Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) to understand the expectations for participation in this project.
+
+## 📜 License
+
+This project is licensed under the MIT License.
