@@ -19,11 +19,10 @@ A curated collection of DevOps projects, grouped by **difficulty level** and **t
 - ### [MEAN STACK IMPLEMENTATION](./beginner/linux/mean-stack/README.md)[⭐]
 - ### [IMPLEMENT A CLIENT SERVER AERCHITECTURE USING MYSQL DATABASE MANAGEMENT SYSTEM](./beginner/linux/project-05-wordpress-client-server-DBMS/README.md)[⭐]
 - ### [ WEB SOLUTION WITH WORDPRESS](./beginner/linux/wordpress/)[⭐]
-- ### [ SETUP CICD PIPELINE FOR NODEJS WEB APPLICATION WITH GITHUB ACTIONS](./beginner/linux/project-08-cicd-pipeline/README.md)[⭐]
-- ### [ CONTAINERIZE A NODEJS APPLICATION WITH DOCKER](./beginner/docker/project-09-nodejs-docker/README.md)[]
-- ### [ DOCKERIZE A FLASK APPLICATION WITH DOCKER COMPOSE](./beginner/docker/project-09-nodejs-docker-compose/README.md)[]
-- ### [ PROVISION CLOUD INFRASTRUCTURE WITH TERRAFORM ](./beginner/terraform/project-10-terraform/README.md)[]
-- ### [ MANAGE AND CONFIGURE INFRASTRUCTURE WITH ANSIBLE ](./beginner/ansible/project-11-ansible/README.md)[]
+- ### [ SETUP CICD PIPELINE FOR NODEJS WEB APPLICATION WITH GITHUB ACTIONS](./beginner/linux/cicd-pipeline/README.md)[⭐]
+- ### [ CONTAINERIZE A FLASK APPLICATION WITH DOCKER AND DOCKER COMPOSE](./beginner/docker/flask-docker/README.md)[⭐]
+- ### [ PROVISION CLOUD INFRASTRUCTURE WITH TERRAFORM ](./beginner/terraform/terraform/README.md)[⭐]
+- ### [ MANAGE AND CONFIGURE INFRASTRUCTURE WITH ANSIBLE ](./beginner/ansible/ansible/README.md)[⭐]
 
 
 ### Move a step further

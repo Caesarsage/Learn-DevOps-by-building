@@ -1,0 +1,30 @@
+# Build stage
+FROM python:3.10-slim AS builder
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+# Run stage
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY --from=builder /root/.local /root/.local
+COPY . .
+
+ENV PATH=/root/.local/bin:$PATH
+ENV PYTHONDONTWRITEBYTECODE=1 \
+  PYTHONUNBUFFERED=1 \
+  PORT=5000
+
+# Create a non-root user
+RUN adduser --disabled-password --gecos '' appuser && \
+  chown -R appuser:appuser /app
+USER appuser
+
+EXPOSE 5000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
