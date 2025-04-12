@@ -1,0 +1,47 @@
+name: CI/CD Pipeline for Node.js
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+
+      - name: Generate test coverage report
+        run: npm run test:coverage
+        
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage-report
+          path: coverage/
+
+  deploy:
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy to production
+        uses: some-deployment-action@v1 # Replace with appropriate deployment action
+        with:
+          # Add deployment configuration
+          api_token: ${{ secrets.DEPLOY_TOKEN }}
