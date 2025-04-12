@@ -19,6 +19,11 @@ A curated collection of DevOps projects, grouped by **difficulty level** and **t
 - ### [MEAN STACK IMPLEMENTATION](./beginner/linux/mean-stack/README.md)[⭐]
 - ### [IMPLEMENT A CLIENT SERVER AERCHITECTURE USING MYSQL DATABASE MANAGEMENT SYSTEM](./beginner/linux/project-05-wordpress-client-server-DBMS/README.md)[⭐]
 - ### [ WEB SOLUTION WITH WORDPRESS](./beginner/linux/wordpress/)[⭐]
+- ### [ SETUP CICD PIPELINE FOR NODEJS WEB APPLICATION WITH GITHUB ACTIONS](./beginner/linux/cicd-pipeline/README.md)[⭐]
+- ### [ CONTAINERIZE A FLASK APPLICATION WITH DOCKER AND DOCKER COMPOSE](./beginner/docker/flask-docker/README.md)[⭐]
+- ### [ PROVISION CLOUD INFRASTRUCTURE WITH TERRAFORM ](./beginner/terraform/basic-server-provision-terraform/README.md)[⭐]
+- ### [ MANAGE AND CONFIGURE INFRASTRUCTURE WITH ANSIBLE ](./beginner/basic-server-config-ansible/ansible/README.md)[⭐]
+
 
 ### Move a step further
 

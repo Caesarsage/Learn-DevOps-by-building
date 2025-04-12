@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docker Flask App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .info {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .counter {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .badge-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .badge-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello from Docker!</h1>
+        <div class="info">
+            <p>This page is served from container: <strong>{{ hostname }}</strong></p>
+            <p>Redis:
+                {% if redis_connected %}
+                <span class="badge badge-success">Connected</span>
+                {% else %}
+                <span class="badge badge-danger">Disconnected</span>
+                {% endif %}
+            </p>
+            {% if redis_connected %}
+            <p>Page views: <span class="counter">{{ counter }}</span></p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
