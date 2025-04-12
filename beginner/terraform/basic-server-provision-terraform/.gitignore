@@ -1,0 +1,9 @@
+# terraform.tfvars
+.terraform
+# Local .terraform directory
+.terraform-version
+
+.terraform*
+.terraformrc
+
+tfplan

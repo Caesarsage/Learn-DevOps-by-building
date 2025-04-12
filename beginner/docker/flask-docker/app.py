@@ -1,31 +1,3 @@
-# from flask import Flask, jsonify, render_template
-# import os
-# import socket
-
-# app = Flask(__name__)
-
-# @app.route('/')
-# def hello():
-#     hostname = socket.gethostname()
-#     return jsonify({
-#         "message": "Hello from Docker!",
-#         "hostname": hostname,
-#         "environment": os.environ.get("ENVIRONMENT", "development")
-#     })
-
-# @app.route('/health')
-# def health():
-#     return jsonify({"status": "ok"})
-
-# @app.route('/ui')i
-# def ui():
-#     hostname = socket.gethostname()
-#     return render_template('index.html', hostname=hostname)
-
-# if __name__ == '__main__':
-#     port = int(os.environ.get("PORT", 5000))
-#     app.run(host='0.0.0.0', port=port, debug=os.environ.get("DEBUG", "true").lower() == "true")
-
 from flask import Flask, jsonify, render_template
 import os
 import socket
