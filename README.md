@@ -22,7 +22,7 @@ A curated collection of DevOps projects, grouped by **difficulty level** and **t
 - ### [ SETUP CICD PIPELINE FOR NODEJS WEB APPLICATION WITH GITHUB ACTIONS](./beginner/linux/cicd-pipeline/README.md)[⭐]
 - ### [ CONTAINERIZE A FLASK APPLICATION WITH DOCKER AND DOCKER COMPOSE](./beginner/docker/flask-docker/README.md)[⭐]
 - ### [ PROVISION CLOUD INFRASTRUCTURE WITH TERRAFORM ](./beginner/terraform/basic-server-provision-terraform/README.md)[⭐]
-- ### [ MANAGE AND CONFIGURE INFRASTRUCTURE WITH ANSIBLE ](./beginner/basic-server-config-ansible/ansible/README.md)[⭐]
+- ### [ MANAGE AND CONFIGURE INFRASTRUCTURE WITH ANSIBLE ](./beginner/basic-server-config-ansible/ansible/README.md)[]
 
 
 ### Move a step further
