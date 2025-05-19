@@ -1,0 +1,40 @@
+
+# Basic WordPress settings
+wordpressUsername: admin
+wordpressPassword: my-password
+wordpressEmail: user@example.com
+wordpressBlogName: "My WordPress Site"
+
+# Service configuration
+service:
+  type: NodePort
+  nodePorts:
+    http: 30080
+    https: 30443
+
+# Ingress configuration
+ingress:
+  enabled: true
+  hostname: wordpress.local
+  ingressClassName: nginx
+  pathType: Prefix
+  path: /
+
+# Persistence settings
+persistence:
+  size: 10Gi
+
+# Resource limits
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 300m
+    memory: 256Mi
+
+# Security context
+securityContext:
+  enabled: true
+  runAsUser: 1001
+  fsGroup: 1001
