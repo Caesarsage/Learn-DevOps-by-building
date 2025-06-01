@@ -69,6 +69,7 @@ A curated collection of DevOps projects, grouped by **difficulty level** and **t
 ### Kubernetes
 - [INSTALLING AND SETTING UP KIND (KUBERNETES IN DOCKER)](intermediate/k8/kind/README.md) [⭐]
 - [WORKING WITH BITNAMI WORDPRESS HELM CHART](intermediate/k8/helm/wordpress-deployment-with-helm/README.md) [⭐]
+- [GitOps WITH KUBERNETES AND HELM](./intermediate/k8/gitops/gitops-k8s-helm/README.md) [⭐]
 
 ### Security
 - [CONTINUOUS INTEGRATION PIPELINE FOR TOOLING WEBSITE](./intermediate/security/ci-tooling/README.md)
