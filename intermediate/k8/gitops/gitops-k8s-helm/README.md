@@ -1,6 +1,6 @@
 # GitOps with Kubernetes Guide - Beginner-Friendly
 
-![alt text](images/architecture.png)
+![architecture](images/architecture.png)
 source: [QA platform](https://www.qa.com/)
 
 ## Table of Contents
