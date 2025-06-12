@@ -1,6 +1,6 @@
 # Kubernetes Networking Hands-On Lab Guide
 
-This lab provides practical implementations of all the scenarios described my article Kubernete networking
+This lab provides practical implementations of all the scenarios described my article Kubernetes networking
 
 ## Prerequisites
 
