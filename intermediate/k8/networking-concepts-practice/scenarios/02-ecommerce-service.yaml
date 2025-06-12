@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-catalog
+spec:
+  selector:
+    app: product-catalog
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopping-cart
+spec:
+  selector:
+    app: shopping-cart
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-auth
+spec:
+  selector:
+    app: user-auth
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-processor
+spec:
+  selector:
+    app: payment-processor
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP

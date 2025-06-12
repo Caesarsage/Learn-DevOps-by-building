@@ -1,0 +1,25 @@
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: frontend-policy
+  namespace: default
+spec:
+  selector: app == 'frontend'
+  types:
+  - Ingress
+  - Egress
+  ingress:
+  - action: Log
+    metadata:
+      annotations:
+        policy: "frontend-ingress"
+  - action: Allow
+    protocol: TCP
+    destination:
+      ports: [80, 443]
+  egress:
+  - action: Log
+    metadata:
+      annotations:
+        policy: "frontend-egress"
+  - action: Allow
