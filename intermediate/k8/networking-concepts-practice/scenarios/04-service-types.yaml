@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-frontend
+  template:
+    metadata:
+      labels:
+        app: web-frontend
+    spec:
+      containers:
+      - name: web
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+---
+# ClusterIP Service (default)
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: web-frontend
+  ports:
+  - port: 80
+    targetPort: 80
+---
+# NodePort Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-nodeport
+spec:
+  type: NodePort
+  selector:
+    app: web-frontend
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080

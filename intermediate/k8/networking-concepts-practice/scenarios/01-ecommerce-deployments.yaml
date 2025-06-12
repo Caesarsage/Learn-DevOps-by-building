@@ -1,0 +1,95 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-catalog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: product-catalog
+  template:
+    metadata:
+      labels:
+        app: product-catalog
+        tier: backend
+    spec:
+      containers:
+      - name: catalog
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: SERVICE_NAME
+          value: "product-catalog"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopping-cart
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: shopping-cart
+  template:
+    metadata:
+      labels:
+        app: shopping-cart
+        tier: backend
+    spec:
+      containers:
+      - name: cart
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: SERVICE_NAME
+          value: "shopping-cart"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-auth
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-auth
+  template:
+    metadata:
+      labels:
+        app: user-auth
+        tier: backend
+    spec:
+      containers:
+      - name: auth
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: SERVICE_NAME
+          value: "user-auth"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-processor
+  template:
+    metadata:
+      labels:
+        app: payment-processor
+        tier: secure
+    spec:
+      containers:
+      - name: payment
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        env:
+        - name: SERVICE_NAME
+          value: "payment-processor"

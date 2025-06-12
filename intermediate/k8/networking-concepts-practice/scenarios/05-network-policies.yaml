@@ -1,0 +1,48 @@
+# Default deny all ingress traffic in production
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+---
+# Allow only specific traffic to payment pods
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: payment-policy
+  namespace: secure-payment
+spec:
+  podSelector:
+    matchLabels:
+      app: payment-processor
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          environment: production
+    - podSelector:
+        matchLabels:
+          role: checkout
+    ports:
+    - protocol: TCP
+      port: 80
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.96.0.0/12  # Cluster internal traffic
+    ports:
+    - protocol: TCP
+      port: 53  # DNS
+  - to:
+    - ipBlock:
+        cidr: 192.168.1.0/24  # External payment gateway
+    ports:
+    - protocol: TCP
+      port: 443
