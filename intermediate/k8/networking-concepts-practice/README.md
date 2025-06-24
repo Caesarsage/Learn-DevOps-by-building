@@ -1,6 +1,7 @@
 # Kubernetes Networking Hands-On Lab Guide
 
 This lab provides practical implementations of all the scenarios described my article Kubernetes networking
+[Kubernetes networking tutorial: A complete guide](https://www.freecodecamp.org/news/kubernetes-networking-tutorial-for-developers/)
 
 ## Prerequisites
 
