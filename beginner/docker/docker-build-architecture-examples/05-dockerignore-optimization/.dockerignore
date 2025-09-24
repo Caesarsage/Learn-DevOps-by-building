@@ -1,0 +1,6 @@
+dist/
+logs/
+tmp/
+.git/
+*.log
+*.bin
