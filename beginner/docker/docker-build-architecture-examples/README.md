@@ -2,7 +2,7 @@
 
 Code samples to accompany the article: **“Mastering Docker Build Contexts and Architecture”**.
 
-**Article** :
+**Article** : [https://www.freecodecamp.org/news/docker-build-tutorial-learn-contexts-architecture-and-performance-optimization-techniques](https://www.freecodecamp.org/news/docker-build-tutorial-learn-contexts-architecture-and-performance-optimization-techniques/)
 
 This repo demonstrates common scenarios, best practices, and pitfalls of Docker builds.
 Each folder contains its own `Dockerfile`, source files, and a `README.md` with usage instructions.
