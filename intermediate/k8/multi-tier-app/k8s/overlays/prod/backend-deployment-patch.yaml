@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  # Prod: run more API replicas
+  replicas: 5
+  template:
+    spec:
+      containers:
+        - name: backend
+          # Prod: slightly higher resources
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "300m"
+            limits:
+              memory: "1Gi"
+              cpu: "800m"

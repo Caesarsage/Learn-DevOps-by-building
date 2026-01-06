@@ -1,0 +1,108 @@
+# Headless Service (for stable network IDs nd StatefulSet)
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-headless
+  namespace: task-app
+  labels:
+    app: redis
+spec:
+  clusterIP: None  # Headless service
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: redis
+
+---
+# Service 2: Normal ClusterIP Service (for clients connections) loadbalanced
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service # <- Backend expects this exact name
+  namespace: task-app
+  labels:
+    app: redis
+spec:
+  type: ClusterIP # Normal service
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+    protocol: TCP
+    name: redis
+
+---
+# StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  namespace: task-app
+spec:
+  serviceName: redis-headless  # Must match headless service
+  replicas: 3  # 3 Redis instances
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379
+          name: redis
+        command:
+        - redis-server
+        - --requirepass
+        - $(REDIS_PASSWORD)
+        - --appendonly
+        - "yes"  # Enable persistence
+        - --dir
+        - /data
+        env:
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: REDIS_PASSWORD
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+        livenessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - --no-auth-warning
+            - -a
+            - $(REDIS_PASSWORD)
+            - ping
+          initialDelaySeconds: 5
+          periodSeconds: 5
+  # VolumeClaimTemplates - creates PVC per pod automatically!
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

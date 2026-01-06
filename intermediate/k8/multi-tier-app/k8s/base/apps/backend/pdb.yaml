@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: backend-pdb
+  namespace: task-app
+spec:
+  minAvailable: 2  # Always keep at least 2 backend pods running
+  selector:
+    matchLabels:
+      app: backend

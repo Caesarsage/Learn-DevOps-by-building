@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: task-app
+data:
+  # Override environment for production
+  NODE_ENV: "production"

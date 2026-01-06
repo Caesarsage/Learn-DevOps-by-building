@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: task-app
+  labels:
+    name: task-app
+    environment: development

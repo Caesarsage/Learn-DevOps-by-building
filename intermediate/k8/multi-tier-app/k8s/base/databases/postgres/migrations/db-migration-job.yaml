@@ -1,0 +1,89 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+  namespace: task-app
+spec:
+  # Job completion settings
+  completions: 1  # Run once successfully
+  parallelism: 1  # One pod at a time
+  backoffLimit: 3  # Retry up to 3 times if fails
+
+  template:
+    metadata:
+      labels:
+        app: db-migration
+    spec:
+      restartPolicy: Never  # Don't restart on failure (Job handles retries)
+      ttlSecondsAfterFinished: 3600  # Delete 1 hour after completion
+      containers:
+      - name: migration
+        image: postgres:15-alpine
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Starting database migration..."
+
+          # Wait for database to be ready
+          until pg_isready -h $DB_HOST -U $DB_USER; do
+            echo "Waiting for database..."
+            sleep 2
+          done
+
+          echo "Database is ready!"
+
+          # Run migration
+          psql -h $DB_HOST -U $DB_USER -d $DB_NAME <<EOF
+
+          -- Create additional tables
+          CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            username VARCHAR(255) UNIQUE NOT NULL,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          );
+
+          CREATE TABLE IF NOT EXISTS task_comments (
+            id SERIAL PRIMARY KEY,
+            task_id INTEGER REFERENCES tasks(id) ON DELETE CASCADE,
+            comment TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          );
+
+          -- Create indexes
+          CREATE INDEX IF NOT EXISTS idx_tasks_status ON tasks(status);
+          CREATE INDEX IF NOT EXISTS idx_tasks_priority ON tasks(priority);
+          CREATE INDEX IF NOT EXISTS idx_task_comments_task_id ON task_comments(task_id);
+
+          -- Insert sample data
+          INSERT INTO users (username, email) VALUES
+            ('admin', 'admin@example.com'),
+            ('user1', 'user1@example.com')
+          ON CONFLICT (username) DO NOTHING;
+
+          EOF
+
+          echo "Migration completed successfully!"
+
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: DB_HOST
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: DB_USER
+        - name: PGPASSWORD  # PostgreSQL reads this automatically
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: DB_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: DB_NAME

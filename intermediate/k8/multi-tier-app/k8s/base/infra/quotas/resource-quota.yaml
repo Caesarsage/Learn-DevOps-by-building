@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: task-app-quota
+  namespace: task-app
+spec:
+  hard:
+    # Compute resources
+    requests.cpu: "10"           # Total CPU requests: 10 cores
+    requests.memory: 20Gi        # Total memory requests: 20GB
+    limits.cpu: "20"             # Total CPU limits: 20 cores
+    limits.memory: 40Gi          # Total memory limits: 40GB
+
+    # Object counts
+    pods: "50"                   # Max 50 pods
+    services: "20"               # Max 20 services
+    persistentvolumeclaims: "10" # Max 10 PVCs
+
+    # Storage
+    requests.storage: 100Gi      # Total storage: 100GB

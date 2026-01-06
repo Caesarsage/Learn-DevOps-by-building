@@ -1,0 +1,93 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  namespace: task-app
+spec:
+  # Schedule: Every day at 2 AM
+  schedule: "0 2 * * *"
+
+  # How many successful job histories to keep
+  successfulJobsHistoryLimit: 3
+
+  # How many failed job histories to keep
+  failedJobsHistoryLimit: 1
+
+  # Concurrency policy
+  concurrencyPolicy: Forbid  # Don't start new if previous still running
+
+  # Starting deadline (skip if missed by more than this)
+  startingDeadlineSeconds: 300  # 5 minutes
+
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        metadata:
+          labels:
+            app: postgres-backup
+        spec:
+          restartPolicy: OnFailure
+
+          containers:
+          - name: backup
+            image: postgres:15-alpine
+            command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Starting PostgreSQL backup..."
+
+              # Create backup filename with timestamp
+              BACKUP_FILE="/backups/postgres-backup-$(date +%Y%m%d-%H%M%S).sql"
+
+              echo " Backing up to: $BACKUP_FILE"
+
+              # Perform backup
+              pg_dump -h $DB_HOST -U $DB_USER -d $DB_NAME > $BACKUP_FILE
+
+              if [ $? -eq 0 ]; then
+                echo " Backup completed successfully!"
+                echo " Backup size: $(du -h $BACKUP_FILE | cut -f1)"
+
+                # Keep only last 7 backups
+                echo "Cleaning up old backups..."
+                ls -t /backups/postgres-backup-*.sql | tail -n +8 | xargs -r rm
+
+                echo "Current backups:"
+                ls -lh /backups/
+              else
+                echo " Backup failed!"
+                exit 1
+              fi
+
+            env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_HOST
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_USER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_PASSWORD
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: DB_NAME
+
+            volumeMounts:
+            - name: backup-storage
+              mountPath: /backups
+
+          volumes:
+          - name: backup-storage
+            persistentVolumeClaim:
+              claimName: backup-pvc

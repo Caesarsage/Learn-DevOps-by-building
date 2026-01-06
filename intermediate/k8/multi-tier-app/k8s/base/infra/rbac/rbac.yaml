@@ -1,0 +1,57 @@
+# Role: Developer - Can view resources, deploy apps
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer
+  namespace: task-app
+rules:
+# Can read most resources
+- apiGroups: [""]
+  resources: ["pods", "services", "configmaps", "secrets"]
+  verbs: ["get", "list", "watch"]
+
+# Can manage deployments
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch", "create", "update", "patch"]
+
+# Can view logs
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get"]
+
+---
+# Role: Read-Only - Can only view
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: read-only
+  namespace: task-app
+rules:
+- apiGroups: ["", "apps"]
+  resources: ["*"]
+  verbs: ["get", "list", "watch"]
+
+---
+# ServiceAccount: app-deployer
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: app-deployer
+  namespace: task-app
+
+---
+# RoleBinding: Assign developer role to app-deployer
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: app-deployer-binding
+  namespace: task-app
+subjects:
+- kind: ServiceAccount
+  name: app-deployer
+  namespace: task-app
+roleRef:
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io

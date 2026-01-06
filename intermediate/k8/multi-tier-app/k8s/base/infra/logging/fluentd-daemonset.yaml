@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd
+  namespace: task-app
+  labels:
+    app: fluentd
+spec:
+  selector:
+    matchLabels:
+      app: fluentd
+  template:
+    metadata:
+      labels:
+        app: fluentd
+    spec:
+      updateStrategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 1 # Update one node at a time
+
+      # Use a dedicated service account (we created one under fluentd-rbac.yaml) so we can grant only necessary RBAC
+      serviceAccountName: fluentd
+      # Run on all nodes (or use nodeSelector to filter)
+      tolerations:
+        # Allow running on control-plane (optional)
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
+
+      containers:
+        - name: fluentd
+          image: fluent/fluentd-kubernetes-daemonset:v1-debian-elasticsearch
+          env:
+            # Configure output (we'll just log for now)
+            - name: FLUENT_ELASTICSEARCH_HOST
+              value: "elasticsearch.logging.svc.cluster.local"
+            - name: FLUENT_ELASTICSEARCH_PORT
+              value: "9200"
+
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "100m"
+            limits:
+              memory: "400Mi"
+              cpu: "200m"
+
+          volumeMounts:
+            # Mount node's log directory
+            - name: varlog
+              mountPath: /var/log
+            # Mount container logs
+            - name: varlibdockercontainers
+              mountPath: /var/lib/docker/containers
+              readOnly: true
+
+      volumes:
+        # Node's log directory
+        - name: varlog
+          hostPath:
+            path: /var/log
+        # Container log directory
+        - name: varlibdockercontainers
+          hostPath:
+            path: /var/lib/docker/containers

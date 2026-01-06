@@ -1,0 +1,37 @@
+# Backend PDB
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: backend-pdb
+  namespace: task-app
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: backend
+
+---
+# Frontend PDB
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: frontend-pdb
+  namespace: task-app
+spec:
+  minAvailable: 1  # Keep at least 1 frontend running
+  selector:
+    matchLabels:
+      app: frontend
+
+---
+# Redis PDB (StatefulSet)
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: redis-pdb
+  namespace: task-app
+spec:
+  minAvailable: 2  # Keep at least 2 Redis instances
+  selector:
+    matchLabels:
+      app: redis
