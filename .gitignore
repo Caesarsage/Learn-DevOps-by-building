@@ -85,7 +85,6 @@ dist
 
 # Gatsby files
 .cache/
-public
 
 # Storybook build outputs
 .out
@@ -112,7 +111,7 @@ ehthumbs.db
 Thumbs.db
 
 # Docker
-.dockerignore
+# .dockerignore
 
 # Azure and Terraform
 terraform.tfstate
